@@ -1,0 +1,44 @@
+﻿@model Grocery
+
+<form asp-action="Index" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <textarea asp-for="Description" class="form-control"> </textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Manufacturer" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <input asp-for="Manufacturer" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryGroceryId" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <input asp-for="CategoryGroceryId" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+
+            </div>
+</form>
+
+
+
