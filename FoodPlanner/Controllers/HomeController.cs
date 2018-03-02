@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using FoodPlanner.Data.Interfaces;
-using FoodPlanner.Domain;
 using FoodPlanner.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +29,7 @@ namespace FoodPlanner.Controllers
 
             return View(homeViewModel);
         }
+
         public IActionResult Details(int id)
         {
             var recipeInfo = _recipeInfoRepository.GetRecipeInfoById(id);

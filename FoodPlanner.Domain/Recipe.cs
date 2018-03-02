@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FoodPlanner.Domain
 {
@@ -14,6 +11,5 @@ namespace FoodPlanner.Domain
         public List<Grocery> Groceries {get; set; }
         public List<PieceOfJob> PiecesOfJobs { get; set; }
         public List<RecipeInfoRecipe> RecipeInfoRecipes { get; set; }
-
     }
 }

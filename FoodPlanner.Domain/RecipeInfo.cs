@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FoodPlanner.Domain
 {
@@ -14,5 +11,5 @@ namespace FoodPlanner.Domain
         public string ImageUrl { get; set; }
         public string ImageThumbnailUrl { get; set; }
         public List<RecipeInfoRecipe> RecipeInfoRecipes { get; set; }
-}
+    }
 }

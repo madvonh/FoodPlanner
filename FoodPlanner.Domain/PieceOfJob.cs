@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FoodPlanner.Domain
+﻿namespace FoodPlanner.Domain
 {
     public class PieceOfJob
     {

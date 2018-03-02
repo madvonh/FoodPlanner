@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FoodPlanner.Data.Interfaces;
 using FoodPlanner.Domain;
-
 
 namespace FoodPlanner.Data.Repositories
 {

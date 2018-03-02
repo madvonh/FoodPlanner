@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FoodPlanner.Data.Interfaces;
+﻿using FoodPlanner.Data.Interfaces;
 using FoodPlanner.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +34,5 @@ namespace FoodPlanner.Controllers
         {
             return View();
         }
-
     }
 }

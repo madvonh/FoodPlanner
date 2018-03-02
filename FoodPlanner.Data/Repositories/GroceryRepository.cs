@@ -1,8 +1,4 @@
-﻿using System;
-using FoodPlanner.Data.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FoodPlanner.Data.Interfaces;
 using FoodPlanner.Domain;
 
     namespace FoodPlanner.Data.Repositories
@@ -13,7 +9,6 @@ using FoodPlanner.Domain;
         public GroceryRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-
         }
         public void AddGrocery(Grocery grocery)
         {
