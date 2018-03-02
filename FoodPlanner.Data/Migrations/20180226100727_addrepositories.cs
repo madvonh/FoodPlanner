@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FoodPlanner.Migrations
+namespace FoodPlanner.Data.Migrations
 {
     public partial class addrepositories : Migration
     {

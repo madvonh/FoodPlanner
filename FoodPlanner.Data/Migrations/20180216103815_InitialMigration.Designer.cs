@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace FoodPlanner.Migrations
+namespace FoodPlanner.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20180216103815_InitialMigration")]

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace FoodPlanner.Migrations
+namespace FoodPlanner.Data.Migrations
 {
     public partial class identityadded : Migration
     {
