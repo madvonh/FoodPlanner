@@ -8,6 +8,10 @@ using FoodPlanner.Data;
 using FoodPlanner.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using FoodPlanner.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.Extensions.Logging.AzureAppServices;
 
 namespace FoodPlanner
 {
@@ -28,7 +32,18 @@ namespace FoodPlanner
             //register our own services
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddOpenIdConnect(options =>
+            {
+                Configuration.Bind("AzureAd", options);
+            })
+            .AddCookie();
+
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddTransient<IRecipeInfoRepository, RecipeInfoRepository>();
             services.AddTransient<IGroceryRepository, GroceryRepository>();
@@ -42,29 +57,19 @@ namespace FoodPlanner
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
-            //IConfiguration config
-            IGreeter greeter
-            )
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if( env.IsDevelopment())
             { 
                  app.UseDeveloperExceptionPage();
             }
-            //app.Run(async (context) =>
-            //{
-            //    var greeting = Configuration["Greeting"];
-            //    await context.Response.WriteAsync(greeting);
+            
+            //this ensures all pages will use ssl
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
 
-            //});
-            //app.Run(async (context) =>
-            //{
-            //    var greeting = greeter.GetMessageOfTheDay(); 
-            //    await context.Response.WriteAsync(greeting);
-
-            //});
             app.UseStatusCodePages();
             app.UseStaticFiles();
+
             app.UseAuthentication();
             app.UseMvc(routes =>
             {

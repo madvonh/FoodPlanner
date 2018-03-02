@@ -17,6 +17,7 @@ namespace FoodPlanner.Controllers
         public IActionResult Index() => View();
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(Grocery grocery)
         {
             if (ModelState.IsValid)

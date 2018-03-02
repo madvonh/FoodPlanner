@@ -1,5 +1,8 @@
 ﻿using System.Threading.Tasks;
 using FoodPlanner.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,15 +13,21 @@ namespace FoodPlanner.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AccountController(SignInManager<IdentityUser> signInManger, UserManager<IdentityUser> userManger)
-        {
-            _signInManager = signInManger;
-            _userManager = userManger;
-        }
+        //public AccountController(SignInManager<IdentityUser> signInManger, UserManager<IdentityUser> userManger)
+        //{
+        //    _signInManager = signInManger;
+        //    _userManager = userManger;
+        //}
 
         public IActionResult Login()
         {
-            return View();
+            var redirectUrl = Url.RouteUrl("/Home");
+            return Challenge(
+                new AuthenticationProperties { RedirectUri = redirectUrl },
+                // challenge the user by logging in with OIDC server
+                OpenIdConnectDefaults.AuthenticationScheme
+            );
+            //return View();
         }
 
         [HttpPost]
@@ -63,11 +72,25 @@ namespace FoodPlanner.Controllers
             return View(loginViewModel);
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await _signInManager.SignOutAsync();
+        //    return RedirectToAction("Index", "Home");
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            var callbackUrl = Url.Page("/Index");
+            return SignOut(
+            new AuthenticationProperties { RedirectUri = callbackUrl
+            },
+            // remove cookie that authenticates user
+            CookieAuthenticationDefaults.AuthenticationScheme, 
+            // also logout of OIDC identity provider
+            OpenIdConnectDefaults.AuthenticationScheme
+        );
         }
     }
 }
