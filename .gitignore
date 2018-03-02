@@ -34,3 +34,16 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Directories #
+#####################
+.vs/*
+Foodplanner.Data/bin/*
+Foodplanner.Data/obj/*
+Foodplanner.Domain/bin/*
+Foodplanner.Domain/obj/*
+Foodplanner/Properties/*
+Foodplanner/bin/*
+Foodplanner/obj/*
+Foodplanner/wwwroot/lib/bootstrap/*
+Foodplanner/wwwroot/lib/jquery/*
