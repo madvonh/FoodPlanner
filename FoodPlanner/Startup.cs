@@ -63,12 +63,12 @@ namespace FoodPlanner
             //    await context.Response.WriteAsync(greeting);
 
             //});
-            app.Run(async (context) =>
-            {
-                var greeting = greeter.GetMessageOfTheDay(); 
-                await context.Response.WriteAsync(greeting);
+            //app.Run(async (context) =>
+            //{
+            //    var greeting = greeter.GetMessageOfTheDay(); 
+            //    await context.Response.WriteAsync(greeting);
 
-            });
+            //});
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseAuthentication();
