@@ -47,3 +47,4 @@ Foodplanner/bin/*
 Foodplanner/obj/*
 Foodplanner/wwwroot/lib/bootstrap/*
 Foodplanner/wwwroot/lib/jquery/*
+Foodplanner/node_modules/*
