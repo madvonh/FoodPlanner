@@ -6,12 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using FoodPlanner.Data;
 using FoodPlanner.Data.Repositories;
-using Microsoft.AspNetCore.Identity;
 using FoodPlanner.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Rewrite;
-using Microsoft.Extensions.Logging.AzureAppServices;
 
 namespace FoodPlanner
 {
@@ -43,8 +41,6 @@ namespace FoodPlanner
             })
             .AddCookie();
 
-            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-
             services.AddTransient<IRecipeInfoRepository, RecipeInfoRepository>();
             services.AddTransient<IGroceryRepository, GroceryRepository>();
 
@@ -69,6 +65,8 @@ namespace FoodPlanner
 
             app.UseStatusCodePages();
             app.UseStaticFiles();
+
+            app.UseNodeModules(env.ContentRootPath);
 
             app.UseAuthentication();
             app.UseMvc(routes =>

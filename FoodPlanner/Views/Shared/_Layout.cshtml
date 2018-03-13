@@ -4,8 +4,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
+    <!----link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" /-->
+    <environment include="Development">
+        <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" />
+    </environment>
+   
+    <environment exclude="Development">
+        <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/node_modules/bootstrap/dist/css/bootstrap.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"/>
+    </environment>
+
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -16,29 +27,62 @@
                     <li><a asp-controller="Grocery" asp-action="Index">Grocery</a></li>
                 </ul>
                 @if (User.Identity.IsAuthenticated)
-        {
-                <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+                {
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
 
+                        </ul>
+                    </form>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        @*<li><a asp-controller="Account" asp-action="Register">Register</a></li>*@
+                        <li><a asp-controller="Account" asp-action="Login">Log in</a></li>
                     </ul>
-                </form>
-        }
-        else
-        {
-                <ul class="nav navbar-nav navbar-right">
-                    @*<li><a asp-controller="Account" asp-action="Register">Register</a></li>*@
-                    <li><a asp-controller="Account" asp-action="Login">Log in</a></li>
-                </ul>
                 }
             </div>
         </div>
     </nav>
 
-    <div class="container body-content">
-        <div class="row">
-            @RenderBody()
-        </div>
+<div class="container body-content">
+    <div class="row">
+        @RenderBody()
     </div>
+</div>
+
+<environment include="Development">
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</environment>
+   
+<environment exclude="Development">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"
+            asp-fallback-href="~/node_modules/jquery/dist/jquery.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity=""
+    >
+    </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+            asp-fallback-href="~/node_modules/jquery/dist/jquery.js"
+            asp-fallback-test="window.jQuery && window.jQuery.validator"
+            crossorigin="anonymous"
+            integrity=""
+    >
+
+    </script>
+    
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.valudatuib,unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"
+            asp-fallback-href="~/node_modules/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+            asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validatorunobtrusive"
+            crossorigin="anonymous"
+            integrity=""
+    >
+    </script>
+</environment>
+
 </body>
 </html>
