@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using FoodPlanner.Data.Interfaces;
@@ -8,6 +9,10 @@ using FoodPlanner.Data;
 using FoodPlanner.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using FoodPlanner.Services;
+using FoodPlanner.Storage;
+using FoodPlanner.Storage.Interfaces;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace FoodPlanner
 {
@@ -27,6 +32,13 @@ namespace FoodPlanner
         {
             //register our own services
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IAzureBlobStorage>(factory => new AzureBlobStorage(new AzureBlobSettings(
+                storageAccount: Configuration["StorageAccount"],
+                storageKey: Configuration["StorageKey"],
+                containerName: Configuration["ContainerName"])));
+
+            //Configuration.GetConnectionString("StorageConnection"),
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
