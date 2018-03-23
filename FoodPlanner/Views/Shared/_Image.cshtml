@@ -1,0 +1,18 @@
+﻿@model ShowModel
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<h2>Upload an Image</h2>
+
+
+    <form data-ajax-method="POST" enctype="multipart/form-data" asp-controller="RecipeInfo" asp-action="Upload" data-ajax="true" >
+        @Html.AntiForgeryToken()
+        <input type="file" name="image" />
+        <hr />
+        <input type="submit" class="btn btn-primary" value="Go!" />
+    </form>
+@{
+    if (Model != null)
+    {
+        <img src="@Model.Uri" />
+    }
+
+}

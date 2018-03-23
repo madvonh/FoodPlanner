@@ -23,7 +23,6 @@ namespace FoodPlanner
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,13 +35,15 @@ namespace FoodPlanner
             services.AddScoped<IAzureBlobStorage>(factory => new AzureBlobStorage(new AzureBlobSettings(
                 storageAccount: Configuration["StorageAccount"],
                 storageKey: Configuration["StorageKey"],
-                containerName: Configuration["ContainerName"])));
+                containerName: Configuration["ContainerName"],
+                blobServiceEndpoint: Configuration["BlobServiceEndpoint"])));
 
             //Configuration.GetConnectionString("StorageConnection"),
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddTransient<IRecipeInfoRepository, RecipeInfoRepository>();
+            services.AddTransient<IRecipeRepository, RecipeRepository>();
             services.AddTransient<IGroceryRepository, GroceryRepository>();
 
             services.AddSingleton<IGreeter, Greeter>();

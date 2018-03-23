@@ -12,7 +12,9 @@ namespace FoodPlanner.Storage
         public string StorageKey { get;}
         public string ContainerName { get;}
 
-        public AzureBlobSettings(string storageAccount, string storageKey, string containerName)
+        public string BlobServiceEndpoint { get; }
+
+        public AzureBlobSettings(string storageAccount, string storageKey, string containerName, string blobServiceEndpoint)
         {
             if (string.IsNullOrEmpty(storageAccount)) throw new ArgumentNullException("StorageAccount");
 
@@ -20,9 +22,12 @@ namespace FoodPlanner.Storage
 
             if (string.IsNullOrEmpty(storageAccount)) throw new ArgumentNullException("ContainerName");
 
+            if (string.IsNullOrEmpty(storageAccount)) throw new ArgumentNullException("BlobServiceEndpoint");
+
             this.StorageAccount = storageAccount;
             this.StorageKey = storageKey;
             this.ContainerName = containerName;
+            this.BlobServiceEndpoint = blobServiceEndpoint;
         }
     }
 }

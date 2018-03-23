@@ -8,6 +8,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
     @Html.Raw(JavaScriptSnippet.FullScript)
@@ -19,6 +20,7 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Food planner home</a></li>
                     <li><a asp-controller="Grocery" asp-action="Index">Grocery</a></li>
+                    <li><a asp-controller="RecipeInfo" asp-action="Index">RecipeInfo</a></li>
                 </ul>
                 @if (SignInManager.IsSignedIn(User))
                 {

@@ -10,5 +10,7 @@ namespace FoodPlanner.Data.Interfaces
 
         RecipeInfo GetRecipeInfoById(int recipeInfoId);
 
+        void AddRecipeInfo(RecipeInfo recipeinfo);
+
     }
 }

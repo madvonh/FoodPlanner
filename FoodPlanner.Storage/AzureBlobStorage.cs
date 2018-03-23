@@ -41,6 +41,26 @@ namespace FoodPlanner.Storage
             await blockBlob.UploadFromStreamAsync(stream);
         }
 
+        public async Task<Uri> UriFor(string imageId)
+        {
+            //to get an image with a sas shared access signature permission:
+            //
+            var sasPolicy = new SharedAccessBlobPolicy
+            {
+                Permissions = SharedAccessBlobPermissions.Read,
+                SharedAccessStartTime = DateTime.Now.AddMinutes(-15),
+                SharedAccessExpiryTime = DateTime.Now.AddMinutes(30)
+            };
+
+            //Container
+            CloudBlobContainer blobContainer = await GetContainerAsync();
+
+            var blob = blobContainer.GetBlockBlobReference(imageId);
+            var sasToken = blob.GetSharedAccessSignature(sasPolicy);
+
+            return new Uri(_settings.BlobServiceEndpoint + $"/{_settings.ContainerName}/{imageId}{sasToken}");
+        }
+
         public async Task<MemoryStream> DownloadAsync(string blobName)
         {
             //Blob
@@ -89,9 +109,11 @@ namespace FoodPlanner.Storage
 
             //Container
             CloudBlobContainer blobContainer = blobClient.GetContainerReference(_settings.ContainerName);
-            await blobContainer.CreateIfNotExistsAsync();
+            bool exits = await blobContainer.CreateIfNotExistsAsync();
 
             //// Set the permissions so the blobs are public. 
+            if (exits) return blobContainer;
+
             var permissions = new BlobContainerPermissions
             {
                 PublicAccess = BlobContainerPublicAccessType.Blob

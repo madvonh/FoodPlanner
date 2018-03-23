@@ -1,0 +1,73 @@
+﻿@model RecipeInfoViewModel
+
+<form asp-action="Index" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="RecipeInfo.Title" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="RecipeInfo.Title" class="form-control" />
+            <span asp-validation-for="RecipeInfo.Title" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RecipeInfo.Description" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <textarea asp-for="RecipeInfo.Description" class="form-control"> </textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RecipeInfo.ImageUrl" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="RecipeInfo.ImageUrl" class="form-control" />
+        </div>
+    </div>
+
+    @Html.Partial("_Image")
+
+    @if(Model != null&& Model.RecipeList!=null)
+    {
+        foreach (var recipe in Model.RecipeList)
+        {
+            <div class="form-group">
+                <label asp-for="@recipe.ShortDescription" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <input asp-for="@recipe.ShortDescription" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@recipe.Name" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <input asp-for="@recipe.Name" class="form-control"/>
+                </div>
+            </div>
+            foreach (var piecesOfJob in recipe.PiecesOfJobs)
+            {
+                    <div class="form-group">
+                        <label asp-for="@piecesOfJob" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <input asp-for="@piecesOfJob" class="form-control"/>
+                        </div>
+                    </div>
+                }
+            <div class="form-group">
+                <label asp-for="@recipe.LongDescription" class="col-md-2 control-label"></label>
+                <div class="col-md-5">
+                    <input asp-for="@recipe.LongDescription" class="form-control"/>
+                </div>
+            </div>
+            }
+        }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+
+    </div>
+</form>
+
+
+

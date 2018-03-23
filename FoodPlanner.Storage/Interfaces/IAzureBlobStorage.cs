@@ -16,6 +16,8 @@ namespace FoodPlanner.Storage.Interfaces
 
         Task DownloadAsync(string blobName, string path);
 
+        Task<Uri> UriFor(string id);
+
         Task<List<AzureBlobItem>> ListAsync();
 
         Task<List<string>> ListFoldersAsync();

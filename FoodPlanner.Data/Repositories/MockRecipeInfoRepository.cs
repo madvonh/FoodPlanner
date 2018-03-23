@@ -36,5 +36,10 @@ namespace FoodPlanner.Data.Repositories
         {
             return _recipeInfo.FirstOrDefault(r => r.Id == recipeInfoId);
         }
+
+        public void AddRecipeInfo(RecipeInfo recipeinfo)
+        {
+            _recipeInfo.Add(recipeinfo);
+        }
     }
 }

@@ -22,5 +22,11 @@ namespace FoodPlanner.Data.Repositories
         {
             return _appDbContext.RecipeInfos.FirstOrDefault(r => r.Id == recipeInfoId);
         }
+
+        public void AddRecipeInfo(RecipeInfo recipeinfo)
+        {
+            _appDbContext.RecipeInfos.Add(recipeinfo);
+            _appDbContext.SaveChanges();
+        }
     }
 }

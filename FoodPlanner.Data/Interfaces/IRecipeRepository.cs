@@ -8,5 +8,9 @@ namespace FoodPlanner.Data.Interfaces
         IEnumerable<Recipe> GetAllRecipe();
 
         Recipe GetRecipeById(int recipeId);
+
+        void AddRecipe(Recipe recipe);
+
+        void AddRecipeList(List<Recipe> recipelist);
     }
 }
